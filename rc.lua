@@ -44,6 +44,12 @@ beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 terminal = "xterm"
 webbrowser = "firefox"
 filemanager = "pcmanfm"
+volumemute = "pamixer -t"
+volumeup = "pamixer -i 1"
+volumedown = "pamixer -d 1"
+musicplay = "mocp -G &> /dev/null"
+musicnext = "mocp -f &> /dev/null"
+musicprev = "mocp -p &> /dev/null"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -248,6 +254,14 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "b",      function () awful.util.spawn(webbrowser) end),
+    awful.key({ modkey,           }, "i",      function () awful.util.spawn(filemanager) end),
+    awful.key({     }, "XF86AudioPrev",        function () awful.util.spawn(musicprev) end),
+    awful.key({     }, "XF86AudioPlay",        function () awful.util.spawn(musicplay) end),
+    awful.key({     }, "XF86AudioNext",        function () awful.util.spawn(musicnext) end),
+    awful.key({     }, "XF86AudioMute",        function () awful.util.spawn(volumemute) end),
+    awful.key({     }, "XF86AudioLowerVolume", function () awful.util.spawn(volumedown) end),
+    awful.key({     }, "XF86AudioRaiseVolume", function () awful.util.spawn(volumeup) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
